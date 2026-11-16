@@ -1,5 +1,5 @@
 import { SearchBox } from "./searchbox";
-import type { menu } from "@/data/menus";
+import type { menu } from "@/data/appData";
 
 type NavBarProps = {
   menuItems: menu[];
@@ -17,7 +17,18 @@ export default function NavBar({ menuItems }: NavBarProps) {
         </div>
         <ul className="flex flex-row gap-[20] flex-1 justify-between self-center">
           {menuItems.map((menu) => (
-            <li key={`${menu.menu_Id}-${menu.menu_Name}`}>{menu.menu_Name}</li>
+            <li  className={menu.menu_HasSubmenu ? 'has-submenu':'' } key={`${menu.menu_Id}-${menu.menu_Name}`}>{menu.menu_Name}
+              {
+                (menu.menu_HasSubmenu) &&(
+                  <ul className="submenu flex-col">
+                    {
+                      menu.subMenu?.map((subMenu)=>(<li key={subMenu.subMenu_Id} className="aligntext-center">{subMenu.subMenu_Name}</li>)) 
+                    }
+                  </ul>
+                )  
+              }
+            </li>
+
           ))}
         </ul>
         <SearchBox className="flex-1 w-full"/>

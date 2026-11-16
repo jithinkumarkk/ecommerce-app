@@ -1,4 +1,4 @@
-import type { Metadata } from "next"; 
+import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { MenuProvider } from "@/context/MenuContext";
@@ -15,7 +15,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={nunitoSans.className}>
-      <body><MenuProvider>{children}</MenuProvider></body>
+      <body>
+        <MenuProvider>
+          {children}
+        </MenuProvider>
+      </body>
     </html>
   );
 }

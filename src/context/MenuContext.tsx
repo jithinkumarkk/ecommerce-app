@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { navBarMenus, topBarMenus  } from "@/data/menus";
+import { navBarMenus, topBarMenus  } from "@/data/appData";
 
 const MenuContext = createContext({ navBarMenuItems: navBarMenus,topBarMenuItems:topBarMenus });
 
