@@ -8,7 +8,7 @@ export default function NavBar({ menuItems }: NavBarProps) {
   
   return (
     <div className="NavBar">
-      <div className="flex flex-row w-11/12 px-5 mr-auto ml-auto gap-[30] justify-between p-[30] items-center">
+      <div className="flex flex-row w-11/12 px-5 mr-auto ml-auto gap-[30] justify-between items-center">
         <div className="logo">
           <img
             className="cropped-image"
@@ -17,7 +17,7 @@ export default function NavBar({ menuItems }: NavBarProps) {
         </div>
         <ul className="flex flex-row gap-[20] flex-1 justify-between self-center">
           {menuItems.map((menu) => (
-            <li  className={menu.menu_HasSubmenu ? 'has-submenu':'' } key={`${menu.menu_Id}-${menu.menu_Name}`}>{menu.menu_Name}
+            <li  className={menu.menu_HasSubmenu ? 'py-[30] has-submenu':'py-[30] ' } key={`${menu.menu_Id}-${menu.menu_Name}`}>{menu.menu_Name}
               {
                 (menu.menu_HasSubmenu) &&(
                   <ul className="submenu flex-col">

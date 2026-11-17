@@ -72,6 +72,9 @@ body {
   position: relative;
   display: inline-block; /* Ensures it wraps its content properly */
 }
+.has-submenu:hover .submenu{
+  border-bottom-color: #ee5f73;
+}
 
 .submenu {
   /* Force display block in case another CSS rule hides it */

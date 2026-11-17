@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import BannerCarousel from "@/components/bannerCarousel";
+import Header from "@/components/layout/Header";
+import BannerCarousel from "@/components/home/bannerCarousel";
 
  export default function Home() {
   return (
