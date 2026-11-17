@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +23,7 @@ export default function BannerCarousel() {
   const slide = BANNERS[current];
 
   return (
-    <section className="relative w-full h-[360] md:h-[480] overflow-hidden ">
+    <section className="relative h-[360px] w-full overflow-hidden md:h-[480px]">
       <Image
         src={slide.image}
         alt={slide.title}
@@ -44,9 +43,9 @@ export default function BannerCarousel() {
         </p>
         <Link
           href={slide.ctaUrl}
-          className="w-fit bg-white text-black font-semibold px-6 py-3 rounded-lg hover:text-black hover:bg-gray-200 transition"
+          className="w-fit bg-white  font-semibold px-6 py-3 rounded-lg hover:text-black hover:bg-gray-200 transition"
         >
-          {slide.ctaText}
+          <span className="text-black">{slide.ctaText}</span>
         </Link>
       </div>
 
