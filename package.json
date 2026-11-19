@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.3.4",
+    "@iconify/react": "^6.0.4",
     "@tailwindcss/postcss": "^4.3.5",
     "next": "16.4.6",
     "react": "19.3.0",

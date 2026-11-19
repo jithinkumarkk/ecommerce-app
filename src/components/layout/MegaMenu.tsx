@@ -9,32 +9,41 @@ type subMenuProps = {
 };  
 
  
- 
- 
-
 function RenderSubMenu({ subMenus = [] }: subMenuProps) {
-  // Create 5 columns
-  const columns = Array.from({ length: 4 }, () => ({
+  // Approximate number of menu rows per column
+  const maxItemsPerColumn = 16;
+
+  // Count items + space needed for category headings
+  const totalItems = subMenus.reduce(
+    (total, subMenu) =>
+      total + (subMenu.items?.length ?? 0) + 2,
+    0
+  );
+
+  // Automatically decide how many columns are needed
+  const columnCount = Math.min(
+    subMenus.length,
+    Math.max(1, Math.ceil(totalItems / maxItemsPerColumn))
+  );
+
+  const columns = Array.from({ length: columnCount }, () => ({
     menus: [] as SubMenu[],
     totalItems: 0,
   }));
 
-  // Arrange larger sections first
+  // Larger sections first for better balancing
   const sortedMenus = [...subMenus].sort(
-    (a, b) =>
-      (b.items?.length ?? 0) - (a.items?.length ?? 0)
+    (a, b) => (b.items?.length ?? 0) - (a.items?.length ?? 0)
   );
 
-  // Add each section to the shortest column
   sortedMenus.forEach((subMenu) => {
     const shortestColumn = columns.reduce((a, b) =>
       a.totalItems <= b.totalItems ? a : b
     );
 
     shortestColumn.menus.push(subMenu);
-
     shortestColumn.totalItems +=
-      (subMenu.items?.length ?? 0) + 1;
+      (subMenu.items?.length ?? 0) + 2;
   });
 
   return (
@@ -42,19 +51,19 @@ function RenderSubMenu({ subMenus = [] }: subMenuProps) {
       {columns.map((column, index) => (
         <li
           key={index}
-          className="flex min-w-0 flex-1 flex-col gap-4 p-4 odd:bg-white even:bg-gray-50  hover:cursor-pointer" 
+          className="w-[220px] shrink-0 p-4 odd:bg-white even:bg-gray-50"
         >
           {column.menus.map((subMenu) => (
-            <div key={subMenu.subMenu_Id}>
-              <h3 className="mb-3 text-sm font-semibold text-pink-500 hover:font-bold">
+            <div key={subMenu.subMenu_Id} className="mb-4">
+              <h3 className="mb-2 text-sm font-semibold text-rose-800">
                 {subMenu.subMenu_Name}
               </h3>
 
-              <ul className="space-y-2">
+              <ul className="space-y-1">
                 {subMenu.items?.map((item) => (
                   <li
                     key={item.item_Id}
-                    className="text-sm text-gray-600 hover:text-black hover:font-semibold hover:cursor-pointer"
+                    className="cursor-pointer text-sm text-gray-600 hover:font-semibold hover:text-black"
                   >
                     {item.item_Name}
                   </li>
@@ -73,11 +82,11 @@ function RenderMainMenu({ menuItems }: menuProps) {
     return(
        <>
         {menuItems.map((menu) => (
-            <li className="group z-10 py-[30] hover:cursor-pointer"  key={`${menu.menu_Id}-${menu.menu_Name}`}>
+            <li className="megamenu group z-10 py-[20] hover:cursor-pointer"  key={`${menu.menu_Id}-${menu.menu_Name}`}>
               <span>{menu.menu_Name}</span> 
               {(menu.menu_HasSubmenu) &&
                  (
-                  <ul className="absolute mx-auto top-full z-50 hidden left-[10%] w-[70%] items-stretch bg-white shadow-xl group-hover:flex">
+                  <ul className="megamenu-dropdown absolute left-0 top-full z-50 hidden w-max max-w-[90vw]  overflow-x-auto bg-white shadow-xl group-hover:flex">
                      <RenderSubMenu subMenus={menu.subMenu}/> 
                   </ul>
                  ) 
@@ -91,7 +100,7 @@ function RenderMainMenu({ menuItems }: menuProps) {
 
 export function MegaMenu({ menuItems }: menuProps) {
     return(
-        <ul className="flex flex-row gap-[20] flex-1 justify-between self-center ">
+        <ul className="relative flex flex-row gap-0 w-10/12 flex-1 justify-around self-center ">
           <RenderMainMenu menuItems={menuItems} />
         </ul>
      );

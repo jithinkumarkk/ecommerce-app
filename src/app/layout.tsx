@@ -1,3 +1,4 @@
+/* Root layout (all pages) */
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";

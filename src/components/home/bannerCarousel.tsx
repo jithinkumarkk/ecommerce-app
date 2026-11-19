@@ -28,6 +28,7 @@ export default function BannerCarousel() {
         src={slide.image}
         alt={slide.title}
         fill
+        loading="eager"
         priority={current === 0}
         sizes="100vw"
         className="object-cover transition-opacity duration-500"
