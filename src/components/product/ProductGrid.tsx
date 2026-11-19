@@ -6,6 +6,7 @@ export  default function ProductGrid(){
             { Products.map((product)=>(
                 <div key={product.id}>
                     <ProductCard  
+                        id={product.id} 
                         name={product.name}
                         image={product.image}
                         brand={product.brand}
