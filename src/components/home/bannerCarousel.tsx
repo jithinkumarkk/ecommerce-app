@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { carousel } from "@/data/appData";
+import { carousel } from "@/data/carousel";
 
 export default function BannerCarousel() {
   const [current, setCurrent] = useState(0);

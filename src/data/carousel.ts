@@ -1,0 +1,60 @@
+
+export const carousel = [
+    {
+      id: 1,
+      title: "Season End Fashion Sale",
+      subtitle: "Up to 50% off on new arrivals",
+      ctaText: "Shop Now",
+      ctaUrl: "/products",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&h=500&fit=crop&auto=format&q=85",
+    },
+    {
+      id: 2,
+      title: "Men's Essential Collection",
+      subtitle: "Sharp tailoring and everyday menswear",
+      ctaText: "Shop Men",
+      ctaUrl: "/categories/men",
+      image: "https://images.unsplash.com/photo-1614252368727-99517bc90d7b",
+    },
+    {
+      id: 3,
+      title: "Women's New Season Edit",
+      subtitle: "Effortless styles and statement pieces",
+      ctaText: "Shop Women",
+      ctaUrl: "/categories/women",
+      image: "https://images.unsplash.com/photo-1483985988355-763728e1935b",
+    },
+    {
+      id: 4,
+      title: "Playful Kids' Wardrobe",
+      subtitle: "Soft, durable styles made for every adventure",
+      ctaText: "Shop Kids",
+      ctaUrl: "/categories/kids",
+      image: "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=1600&h=500&fit=crop&auto=format&q=85",
+    },
+    {
+      id: 5,
+      title: "Modern Home & Living",
+      subtitle: "Refresh your space with curated decor",
+      ctaText: "Shop Home",
+      ctaUrl: "/categories/home",
+      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=500&fit=crop&auto=format&q=85",
+    },
+    {
+      id: 6,
+      title: "Clean Beauty & Skincare",
+      subtitle: "Daily glow essentials and botanical formulas",
+      ctaText: "Shop Beauty",
+      ctaUrl: "/categories/beauty",
+      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&h=500&fit=crop&auto=format&q=85",
+    },
+    {
+      id: 7,
+      title: "Gen Z Studio Drop",
+      subtitle: "Bold streetwear and limited-edition lookbooks",
+      ctaText: "Explore Studio",
+      ctaUrl: "/categories/genz",
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600&h=500&fit=crop&auto=format&q=85",
+    },
+  ];
+  

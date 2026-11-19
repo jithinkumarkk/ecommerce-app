@@ -5,7 +5,7 @@ import { useMenu } from "@/context/MenuContext";
 export default function Header(){
     const { navBarMenuItems, topBarMenuItems } = useMenu();
     return(
-       <>
+       <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
         <div className="topBar">
             <ul className="topbar-menus flex flex-row w-11/12 px-5 mr-auto ml-auto gap-[30] text-sm">
                 <li className="flex-1">Free shipping, 30-day return or refund guarantee.</li>     
@@ -26,6 +26,6 @@ export default function Header(){
             </ul>    
         </div>
         <NavBar menuItems={navBarMenuItems} />
-       </>
+       </header>
     )
 }

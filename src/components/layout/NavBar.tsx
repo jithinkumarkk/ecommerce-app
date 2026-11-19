@@ -1,4 +1,4 @@
-import type { menu } from "@/data/appData";
+import type { menu } from "@/data/menu";
 import { MegaMenu } from "./MegaMenu";
 import { SearchBox } from "./SearchBox";
 import { Logo } from "./logo";

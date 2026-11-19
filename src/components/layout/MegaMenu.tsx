@@ -1,5 +1,5 @@
 
-import type { menu,SubMenu } from "@/data/appData";
+import type { menu,SubMenu } from "@/data/menu";
 
 type menuProps = {
     menuItems: menu[];
