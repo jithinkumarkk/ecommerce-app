@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useState,ViewTransition } from "react";
+import { useState, ViewTransition } from "react";
 
 type ProductGalleryProps = {
   productId: number;
@@ -18,7 +17,6 @@ export default function ProductGallery({
 
   return (
     <div className="flex items-start gap-4">
-
       {/* Thumbnail images */}
       <div className="flex w-20 shrink-0 flex-col gap-3">
         {images.map((image, index) => (
@@ -27,14 +25,14 @@ export default function ProductGallery({
             key={index}
             onClick={() => setSelectedImage(index)}
             className={`cursor-pointer overflow-hidden border-2 ${
-              selectedImage === index
-                ? "border-black"
-                : "border-gray-300"
+              selectedImage === index ? "border-black" : "border-gray-300"
             }`}
           >
-            
-              <img   src={image} alt={`${name} - View ${index + 1}`} className="aspect-3/4 w-full object-cover "  />
-            
+            <img
+              src={image}
+              alt={`${name} - View ${index + 1}`}
+              className="aspect-3/4 w-full object-cover "
+            />
           </button>
         ))}
       </div>
@@ -42,10 +40,14 @@ export default function ProductGallery({
       {/* Main image */}
       <div className="min-w-0 flex-1 border border-gray-300">
         <ViewTransition name={`product-${productId}`}>
-          <img src={images[selectedImage]}  alt={name}  className="aspect-3/4 w-full object-cover " />
+          <img
+            id="product-image"
+            src={images[selectedImage]}
+            alt={name}
+            className="aspect-3/4 w-full object-cover "
+          />
         </ViewTransition>
       </div>
-
     </div>
   );
 }

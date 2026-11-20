@@ -12,12 +12,14 @@
     "@ant-design/icons": "^6.3.4",
     "@iconify/react": "^6.0.4",
     "@tailwindcss/postcss": "^4.3.5",
+    "lodash": "^4.18.1",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.27",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

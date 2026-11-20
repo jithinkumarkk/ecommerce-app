@@ -15,9 +15,9 @@ export default function NavBar({ menuItems }: NavBarProps) {
         <Logo/>
         <MegaMenu menuItems={menuItems} />
         <SearchBox className="flex-1 w-full"/>
-        <AppIcon name="mdi:account" />
-        <AppIcon name="lucide:heart" />
-        <AppIcon name="lucide:shopping-cart" />
+        <span id="cart-account" className="inline-flex"> <AppIcon name="mdi:account" /></span>
+        <span id="cart-wish" className="inline-flex"> <AppIcon name="lucide:heart" /> </span>
+        <span id="cart-icon" className="inline-flex"> <AppIcon name="lucide:shopping-bag" />  </span>
       </div>
     </div>
   );

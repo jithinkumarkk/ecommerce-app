@@ -1,10 +1,17 @@
+"use client";
 
 import type { productItem } from "@/data/products";
 import { navBarMenus } from "@/data/menu";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import AppIcon from "@/components/ui/AppIcon";
-import ProductGallery from "./ProductGallery";
-
+import ProductGallery from "./ProductGallery"; 
+import { WishList } from "./buttons/WishList";
+import { AddTocart } from "./buttons/AddtoCart";
+import { useState } from "react";
+import { QuantityInput } from "./buttons/QuantityInput";
+import type { cartItem } from "@/data/cartItem"; 
+import { hideTooltip } from "../ui/ToolTip";
+ 
 type ProductViewProps = {
   product: productItem;
 };
@@ -13,30 +20,28 @@ export default function ProductView({
   product,
 }: ProductViewProps) {
 
+  
+  
   // Find breadcrumb categories from existing MegaMenu
   const departmentPath = "/" + product.categoryPath.split("/")[1];
+  const department     = navBarMenus.find((menu) => "/" + menu.menu_Name.toLowerCase() === departmentPath);
+  const category       = department?.subMenu?.find((sub) => sub.items?.some((item) => item.item_Path === product.categoryPath));
+  const categoryItem   = category?.items?.find((item) => item.item_Path === product.categoryPath);
 
-  const department = navBarMenus.find(
-    (menu) =>
-      "/" + menu.menu_Name.toLowerCase() === departmentPath
-  );
+  const [productSize,setProductSize]= useState<string>('');
+  const [productQuantity,setProductQuantity]= useState<number>(1);
 
-  const category = department?.subMenu?.find(
-    (sub) =>
-      sub.items?.some(
-        (item) => item.item_Path === product.categoryPath
-      )
-  );
-
-  const categoryItem = category?.items?.find(
-    (item) => item.item_Path === product.categoryPath
-  );
+ 
+  const selectedProduct: cartItem = {
+    product: product,
+    size: productSize,
+    quantity: productQuantity
+  };
+  
+  
 
   return (
-    <div className="mx-auto w-11/12 py-10">
-
-     
-
+    <div className="mx-auto w-11/12 py-10"> 
       <div className="mt-5 flex flex-col items-start gap-8 lg:flex-row">
 
         {/* LEFT SECTION - Product Gallery */}
@@ -124,50 +129,35 @@ export default function ProductView({
               Select Size
             </h3>
 
-            <div className="flex flex-wrap gap-3">
-              {product.sizes.map((size) => (
-                <label key={size.name}>
-                  <input
-                    type="radio"
-                    name="product-size"
-                    value={size.name}
-                    disabled={size.stock === 0}
-                    className="peer sr-only"
-                  />
+            <div className="flex flex-wrap gap-3 justify-between"  > {/* Event Delegation - attaching one event handler to the parent container instead of attaching a handler to every child element. */}
+              <div className="flex flex-wrap gap-3 p-1" id="product-size"  onChange={(e) => { setProductSize((e.target as HTMLInputElement).value); hideTooltip("product-size");  }}>
+                 
+                {product.sizes.map((size) => (
+                  <label key={size.name}>
+                    <input
+                      type="radio"
+                      name="product-size"
+                      value={size.name}
+                      disabled={size.stock === 0}
+                      className="peer sr-only"
+                    />
 
-                  <span className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-gray-300 peer-checked:border-black peer-checked:bg-black peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:bg-gray-100 peer-disabled:text-gray-400 peer-disabled:line-through">
-                    {size.name}
-                  </span>
-                </label>
-              ))}
+                    <span className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-gray-300 peer-checked:border-black peer-checked:bg-black peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:bg-gray-100 peer-disabled:text-gray-400 peer-disabled:line-through">
+                      {size.name}
+                    </span>
+                  </label>
+                ))}  
+                
+              </div>
+              
+              <QuantityInput  id="product-quantity" quantity={productQuantity} setProductQuantity={setProductQuantity} />
             </div>
           </div>
 
           {/* Wishlist and Add to Bag */}
           <div className="flex gap-3">
-            <button
-              type="button"
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 border border-gray-300 py-3 animate-press animate-icon-scale"
-            >
-              <span className="animated-icon">
-              <AppIcon
-                name="lucide:heart"
-                className="h-5 w-5"
-              /></span>
-              Wishlist
-            </button>
-
-            <button
-              type="button"
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 bg-slate-900 py-3 text-white animate-press animate-icon "
-            >
-             <span className="animated-icon">
-              <AppIcon
-                name="lucide:shopping-cart"
-                className="h-5 w-5"
-              /></span>
-              Add to Cart
-            </button>
+             <WishList product={selectedProduct} sizeElementId="product-size"  quantityElementId="product-quantity"  />
+             <AddTocart product={selectedProduct} sizeElementId="product-size"  quantityElementId="product-quantity" />  
           </div>
 
           {/* Delivery Information */}
@@ -320,8 +310,10 @@ export default function ProductView({
             </h3>
 
             <div className="flex items-center justify-between bg-gray-50 p-4">
-              <span className="text-2xl font-bold">
-                {product.rating} ★
+              <span className="flex text-2xl font-bold align-middle justify-center">
+                {product.rating}  
+                <AppIcon  name="mdi:star" className="w-5 h-5 m-2" />
+
               </span>
 
               <span className="text-sm">
@@ -336,19 +328,21 @@ export default function ProductView({
             {product.reviews.map((review) => (
               <div
                 key={review.id}
-                className="space-y-2 border-b border-gray-200 py-4"
+                className="space-y-2 border-b border-gray-200 py-4 last:border-none"
               >
                 <div className="flex justify-between">
                   <span className="font-medium">
                     {review.customerName}
                   </span>
 
-                  <span>{review.rating} ★</span>
+                  <span className="flex align-middle justify-center">{review.rating}  <AppIcon  name="mdi:star" className="w-3 h-3 m-1.5" /></span>
                 </div>
-
-                <p className="text-sm text-gray-600">
-                  {review.comment}
-                </p>
+                {(review.comment) &&(
+                    <p className="text-sm text-gray-600">
+                    {review.comment}
+                    </p>
+                )}
+               
               </div>
             ))}
           </div>
@@ -365,6 +359,7 @@ export default function ProductView({
           </div>
 
         </div>
+        
       </div>
     </div>
   );
