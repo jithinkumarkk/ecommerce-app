@@ -26,9 +26,9 @@ export function WishList({ product,sizeElementId,quantityElementId }: productPro
       }
       return;
     }
-    const wish = await getStorage<cartItem[]>("wish", []);
-    wish.push(product); 
-    await setStorage ("wish", wish);
+    const wishList = await getStorage<cartItem[]>("wishlist", []);
+    wishList.push(product); 
+    await setStorage ("wishlist", wishList);
     animateFlyToTarget("product-image", "cart-wish");
     setIsWishlisted(true);
   };

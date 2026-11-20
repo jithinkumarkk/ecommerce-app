@@ -86,6 +86,7 @@ export async function setStorage<T>(
     }
 
     window[type].setItem(key, JSON.stringify(value));
+    window.dispatchEvent(new Event("storage-updated"));
 }
 
 // REMOVE STORAGE
@@ -105,4 +106,5 @@ export async function removeStorage(
     }
 
     window[type].removeItem(key);
+    window.dispatchEvent(new Event("storage-updated"));
 }

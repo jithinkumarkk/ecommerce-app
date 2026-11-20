@@ -3,12 +3,23 @@ import { MegaMenu } from "./MegaMenu";
 import { SearchBox } from "./SearchBox";
 import { Logo } from "./logo";
 import AppIcon from "../ui/AppIcon";
+import ShoppingCount from "@/components/ui/ShoppingCount";
+import { useEffect, useState } from "react";
 type NavBarProps = {
   menuItems: menu[];
 };
 
 export default function NavBar({ menuItems }: NavBarProps) {
-    
+  const [reloadKey, setReloadKey] = useState(0);
+  const reloadShoppingCount = () => {
+    setReloadKey(prev => prev + 1);
+  };
+  useEffect(() => {
+    window.addEventListener("focus", reloadShoppingCount);
+    return () => {
+      window.removeEventListener("focus", reloadShoppingCount);
+    };
+  }, []);
   return (
     <div className="NavBar">
       <div className="relative flex flex-row w-11/12 px-5 mr-auto ml-auto gap-[30] justify-between items-center">
@@ -16,8 +27,8 @@ export default function NavBar({ menuItems }: NavBarProps) {
         <MegaMenu menuItems={menuItems} />
         <SearchBox className="flex-1 w-full"/>
         <span id="cart-account" className="inline-flex"> <AppIcon name="mdi:account" /></span>
-        <span id="cart-wish" className="inline-flex"> <AppIcon name="lucide:heart" /> </span>
-        <span id="cart-icon" className="inline-flex"> <AppIcon name="lucide:shopping-bag" />  </span>
+        <span id="cart-wish" className="inline-flex relative"> <AppIcon name="lucide:heart" /> <ShoppingCount key={`wishlist-${reloadKey}`}  type="wishlist" /> </span>
+        <span id="cart-icon" className="inline-flex relative"> <AppIcon name="lucide:shopping-bag" /> <ShoppingCount key={`cart-${reloadKey}`}  type="cart" />  </span>
       </div>
     </div>
   );
