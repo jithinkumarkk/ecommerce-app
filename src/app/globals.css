@@ -175,3 +175,8 @@ transition: all 0.3s ease-out;
 .product-bg{
   background-color: #f8f9fa;
 }
+ 
+::view-transition-group(*) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}

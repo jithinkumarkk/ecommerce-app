@@ -1,14 +1,16 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState,ViewTransition } from "react";
 
 type ProductGalleryProps = {
+  productId: number;
   images: string[];
   name: string;
 };
 
 export default function ProductGallery({
+  productId,
   images,
   name,
 }: ProductGalleryProps) {
@@ -30,22 +32,18 @@ export default function ProductGallery({
                 : "border-gray-300"
             }`}
           >
-            <img
-              src={image}
-              alt={`${name} - View ${index + 1}`}
-              className="aspect-3/4 w-full object-cover "
-            />
+            
+              <img   src={image} alt={`${name} - View ${index + 1}`} className="aspect-3/4 w-full object-cover "  />
+            
           </button>
         ))}
       </div>
 
       {/* Main image */}
-      <div className="min-w-0 flex-1">
-        <img
-          src={images[selectedImage]}
-          alt={name}
-          className="aspect-3/4 w-full object-cover"
-        />
+      <div className="min-w-0 flex-1 border-2 border-gray-500">
+        <ViewTransition name={`product-${productId}`}>
+          <img src={images[selectedImage]}  alt={name}  className="aspect-3/4 w-full object-cover " />
+        </ViewTransition>
       </div>
 
     </div>

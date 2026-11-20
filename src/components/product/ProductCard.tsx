@@ -1,23 +1,24 @@
 import Link from "next/link"
+import { ViewTransition } from "react"
+import { productItem } from "@/data/products"
 
 type ProductCardProps={
-    id: number
-    name: string,
-    image: string,
-    brand: string, 
-    price:number
+    product: productItem
 }
-export  default function ProductCard({id,name,image,brand,price}: ProductCardProps){
+export  default function ProductCard({product}: ProductCardProps){
     return(
-        <Link key={id}  href={`/product/${id}`}>
+        
+        <Link key={product.id}  href={`/product/${product.id}`}>
         <div className="relative w-full border border-gray-100"> 
-                <img src={image} alt={name} className="product-bg"/>
+                <ViewTransition  name={`product-${product.id}`} >
+                 <img src={product.image} alt={product.name} className="product-bg"/>
+                </ViewTransition>
                 <div className="p-3">
-                    <h3 className="font-bold">{brand}</h3>
-                    <p className="text-sm text-gray-500">{name}</p>
-                    <span className="font-semibold">₹{price}</span>
+                    <h3 className="font-bold">{product.brand}</h3>
+                    <p className="text-sm text-gray-500">{product.name}</p>
+                    <span className="font-semibold">₹{product.price}</span>
                 </div>
         </div>
-        </Link>
+        </Link> 
     )
 }

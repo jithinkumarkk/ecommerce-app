@@ -35,8 +35,15 @@ export default function ProductView({
   return (
     <div className="mx-auto w-11/12 py-10">
 
-      {/* Breadcrumb */}
-      <Breadcrumb
+     
+
+      <div className="mt-5 flex flex-col items-start gap-8 lg:flex-row">
+
+        {/* LEFT SECTION - Product Gallery */}
+        <div className="w-full lg:sticky lg:top-41 lg:w-1/2">
+
+           {/* Breadcrumb */}
+      <Breadcrumb 
         items={[
           { name: "Home", path: "/" },
           ...(department
@@ -55,22 +62,19 @@ export default function ProductView({
               }]
             : []),
           { name: product.name },
-        ]}
+        ]} 
+        className="pb-10"
       />
 
-      <div className="mt-5 flex flex-col items-start gap-8 lg:flex-row">
-
-        {/* LEFT SECTION - Product Gallery */}
-        <div className="w-full lg:sticky lg:top-28 lg:w-1/2">
           <ProductGallery
-            key={product.id}
+            productId={product.id}
             images={product.images.length ? product.images : [product.image]}
             name={product.name}
           />
         </div>
 
         {/* RIGHT SECTION - Product Information */}
-        <div className="flex w-full flex-col gap-5 lg:w-1/2">
+        <div className="flex w-full flex-col gap-5 lg:w-1/2 pt-14">
 
           {/* Product Name and Brand */}
           <div>
