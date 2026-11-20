@@ -147,24 +147,26 @@ export default function ProductView({
           <div className="flex gap-3">
             <button
               type="button"
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 border border-gray-300 py-3"
+              className="flex flex-1 cursor-pointer items-center justify-center gap-2 border border-gray-300 py-3 animate-press animate-icon-scale"
             >
+              <span className="animated-icon">
               <AppIcon
                 name="lucide:heart"
                 className="h-5 w-5"
-              />
+              /></span>
               Wishlist
             </button>
 
             <button
               type="button"
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 bg-slate-900 py-3 text-white"
+              className="flex flex-1 cursor-pointer items-center justify-center gap-2 bg-slate-900 py-3 text-white animate-press animate-icon "
             >
+             <span className="animated-icon">
               <AppIcon
-                name="lucide:shopping-bag"
+                name="lucide:shopping-cart"
                 className="h-5 w-5"
-              />
-              Add to Bag
+              /></span>
+              Add to Cart
             </button>
           </div>
 

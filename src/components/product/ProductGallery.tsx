@@ -40,7 +40,7 @@ export default function ProductGallery({
       </div>
 
       {/* Main image */}
-      <div className="min-w-0 flex-1 border-2 border-gray-500">
+      <div className="min-w-0 flex-1 border border-gray-300">
         <ViewTransition name={`product-${productId}`}>
           <img src={images[selectedImage]}  alt={name}  className="aspect-3/4 w-full object-cover " />
         </ViewTransition>
